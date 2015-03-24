@@ -18,7 +18,9 @@ class CompaniesSpider(BaseSpider):
         company_names = hxs.select('//*[@id="columnLeft"]/table/tbody/tr/td[1]/a/text()').extract()
         country_names = hxs.select('//*[@id="columnLeft"]/table/tbody/tr/td[2]/text()').extract()
         industry_names = hxs.select('//*[@id="columnLeft"]/table/tbody/tr/td[3]/text()').extract()
+        ticker = hxs.select('//*[@id="columnLeft"]/table/tbody/tr/td[1]/a/@href').extract()
+        
 
-        for com, count, ind in zip(company_names, country_names, industry_names):
-            print [com,count,ind]
+        for com, count, ind, tik in zip(company_names, country_names, industry_names, ticker):
+            print [com, count, ind, tik.split('=')[1]]
         

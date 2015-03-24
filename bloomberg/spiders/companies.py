@@ -1,17 +1,22 @@
 
 from scrapy.selector import HtmlXPathSelector
-from scrapy.spider import BaseSpider
+from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+from scrapy.contrib.spiders import CrawlSpider, Rule
 
-class CompaniesSpider(BaseSpider):
+class CompaniesSpider(CrawlSpider):
     
     name = "companies"
-    allowed_domains = ["http://investing.businessweek.com/"]
+    allowed_domains = ["investing.businessweek.com"]
     start_urls = (
         'http://investing.businessweek.com/research/common/symbollookup/symbollookup.asp?letterIn=A',
     )
     
+    rules = ( 
+        Rule(SgmlLinkExtractor(allow=r'symbollookup/symbollookup.asp\?letterIn=A&firstrow=[0-9]'), callback='parse_item', follow = True),
+    )
+
     # scrapy parse --spider=companies -c parse 'http://investing.businessweek.com/research/common/symbollookup/symbollookup.asp?letterIn=A'
-    def parse(self, response):
+    def parse_item(self, response):
         
         hxs = HtmlXPathSelector(response)
         items = []
@@ -19,7 +24,6 @@ class CompaniesSpider(BaseSpider):
         country_names = hxs.select('//*[@id="columnLeft"]/table/tbody/tr/td[2]/text()').extract()
         industry_names = hxs.select('//*[@id="columnLeft"]/table/tbody/tr/td[3]/text()').extract()
         ticker = hxs.select('//*[@id="columnLeft"]/table/tbody/tr/td[1]/a/@href').extract()
-        
 
         for com, count, ind, tik in zip(company_names, country_names, industry_names, ticker):
             print [com, count, ind, tik.split('=')[1]]

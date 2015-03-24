@@ -7,5 +7,8 @@ from scrapy.item import Item, Field
 
 class BloombergItem(Item):
     # define the fields for your item here like:
-    # name = Field()
+    company = Field()
+    country = Field()
+    industry = Field()
+    ticker = Field()
     pass

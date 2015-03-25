@@ -13,8 +13,8 @@ class CompaniesSpider(CrawlSpider):
     )
     
     rules = ( 
-        #Rule(SgmlLinkExtractor(allow=r'symbollookup/symbollookup.asp\?letterIn=[A]'), callback='parse_item', follow = True),
-        Rule(SgmlLinkExtractor(allow=r'symbollookup/symbollookup.asp\?letterIn=[A-B]&firstrow=[0-9]'), callback='parse_item', follow = True),
+        Rule(SgmlLinkExtractor(allow=r'symbollookup/symbollookup.asp\?letterIn=[A-Z0-9]'), callback='parse_item', follow = True),
+        Rule(SgmlLinkExtractor(allow=r'symbollookup/symbollookup.asp\?letterIn=[A-Z0-9]&firstrow=[0-9]'), callback='parse_item', follow = True),
     )
 
     # scrapy parse --spider=companies -c parse 'http://investing.businessweek.com/research/common/symbollookup/symbollookup.asp?letterIn=A'

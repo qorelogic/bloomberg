@@ -12,9 +12,9 @@ BOT_VERSION = '1.0'
 SPIDER_MODULES = ['bloomberg.spiders']
 NEWSPIDER_MODULE = 'bloomberg.spiders'
 ITEM_PIPELINES = {
-    'bloomberg.pipelines.JsonWithEncodingPipeline': 300,
+    'bloomberg.pipelines.JsonWithEncodingPipeline': 600,
     #'bloomberg.pipelines.PrintPipeline': 300,
-    'bloomberg.pipelines.XmlExportPipeline': 300,
+    #'bloomberg.pipelines.XmlExportPipeline': 300,
 }
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 

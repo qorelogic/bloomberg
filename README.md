@@ -2,12 +2,14 @@
 Bloomberg crawler
 
 
+```
 ==================================================
 $ scrapy list
 
 companies
+```
 
-
+```
 ==================================================
 $ scrapy crawl companies
 
@@ -41,5 +43,5 @@ $ scrapy crawl companies
 2015-04-05 00:58:35-0300 [companies] INFO: Spider closed (shutdown)
 2015-04-05 00:58:35-0300 [scrapy] INFO: Dumping global stats:
         {'memusage/max': 33587200, 'memusage/startup': 33587200}
-
+```
 ==================================================
